@@ -2,8 +2,12 @@ const express = require('express')
 const morgan = require('morgan')
 const cors = require('cors')
 const  path  = require('path')
+const dotenv = require('dotenv')
 
 const app = express()
+
+// append .env vars to envirement variables
+dotenv.config('./.env')
 
 
 // initialize middlewares
