@@ -1,9 +1,10 @@
 const express = require("express");
-const AppError = require('http-errors')
+const AppError = require('./errors/AppError')
 const morgan = require("morgan");
 const cors = require("cors");
 const path = require("path");
 const dotenv = require("dotenv");
+const ErrorsGateway = require('./errors/ErrorsGateway')
 
 // append .env vars to envirement variables
 dotenv.config("./.env");
@@ -40,4 +41,4 @@ app.use('*', (req, res, next) => {
 })
 
 // start error Gateway
-app.use()
+app.use(ErrorsGateway)

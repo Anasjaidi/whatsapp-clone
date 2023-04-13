@@ -45,8 +45,11 @@ module.exports = (err, req, res, next) => {
 	err.status = err.status || "error";
 
 	if (req.app.get("env") === "development") {
+    devErrors(err, res)
 	} else if (req.app.get("env") === "testing") {
+    testErrors(err, res)
 	} else {
 		// production
+    proErrors(err, res)
 	}
 };
