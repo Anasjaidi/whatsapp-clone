@@ -12,3 +12,20 @@ server.on("listening", () => {
 	console.log(`* Debugger : ${debug ? "On" : "Off"}`);
 	console.log(`* Running on http://localhost:${port} (CTRL + C to quit)`);
 });
+
+
+// handle uncatched Rejections and exceptions
+process.on("SIGINT", () => {
+	server.close(() => {
+		console.log("server Shuting down.. 🛑");
+		process.exit(1);
+	});
+});
+
+process.on("unhandledRejection", (err) => {
+	console.log("Unhandled Rejection! 💥 Server shuting Down...");
+	console.log(err.name, err.message);
+	server.close(() => {
+		process.exit(1);
+	});
+});
