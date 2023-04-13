@@ -4,6 +4,7 @@ const cors = require('cors')
 const  path  = require('path')
 const dotenv = require('dotenv')
 
+// create instance from express
 const app = express()
 
 // append .env vars to envirement variables
