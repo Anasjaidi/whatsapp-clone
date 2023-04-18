@@ -29,3 +29,12 @@ process.on("unhandledRejection", (err) => {
 		process.exit(1);
 	});
 });
+
+server.on("error", (error) => {
+	if (error.code === "EADDRINUSE") {
+		console.log(`Port ${port} is already in use`);
+		// do something else, like trying a different port
+	} else {
+		console.error(error);
+	}
+});
