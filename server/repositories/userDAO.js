@@ -14,15 +14,12 @@ class UserDAO {
 	async findUserByMail(email) {
 		return await this.users.findUnique({
 			where: { email },
-			select: {  },
 		});
 	}
 
 	async findUserByUid(uid) {
 		return await this.users.findFirst({
 			where: { uid: uid },
-			select: {
-			},
 		});
 	}
 
