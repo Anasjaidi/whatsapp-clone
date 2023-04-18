@@ -1,4 +1,4 @@
-const userDAO = require("../models/userDAO");
+const userDAO = require("../repositories/userDAO");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const AppError = require("../errors/AppError");
