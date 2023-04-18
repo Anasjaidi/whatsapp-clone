@@ -11,7 +11,7 @@ class Auth {
 	}
 
 	async signup(user) {
-		const newUser = await this.userDAO.addNewUser(user);
+		const newUser = await this.userDAO.addUser(user);
 
 		const token = await this.generateToken(
 			user.uid,
@@ -23,7 +23,7 @@ class Auth {
 	}
 
 	async signin(credentails) {
-		const user = await this.userDAO.getUserByEmail(credentails.email);
+		const user = await this.userDAO.findUserByMail(credentails.email);
 
 		if (!user || !this.compare(credentails.password, user.password)) {
 			throw new AppError.Unauthorized("invalid email, or password.");
@@ -56,7 +56,7 @@ class Auth {
 			process.env.JWT_SECRET_KEY
 		);
 
-		const user = await userDAO.getUserByID(decoded.id);
+		const user = await userDAO.findUserByUid(decoded.id);
 
 		if (!user) {
 			return next(AppError.Unauthorized("no user found."));
