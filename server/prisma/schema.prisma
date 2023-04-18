@@ -9,3 +9,38 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id                String    @id @default(uuid())
+  firstName         String    @map("first_name")
+  lastName          String    @map("last_name")
+  email             String    @unique
+  password          String
+  passwordChangeAt  DateTime?
+  chats             Chat[]    @relation("members")
+  adminstratedChats Chat[]    @relation("admins")
+  messsages         Message[]
+}
+
+model Chat {
+  id            String    @id @default(uuid())
+  chatName      String    @map("chat_name")
+  isGroupChat   Boolean   @map("is_group_chat")
+  users         User[]    @relation("members")
+  latestMessage String?   @map("latest_message")
+  groupAdmins   User[]    @relation("admins")
+  messages      Message[]
+
+  @@map("chats")
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String   @map("author_id")
+  chat      Chat     @relation(fields: [chatId], references: [id])
+  chatId    String   @map("chat_id")
+  createdAt DateTime @default(now())
+
+  @@map("messages")
+}
