@@ -1,5 +1,7 @@
 import { Box, Container, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react'
 import React from 'react'
+import Login from '../components/Auth/Login';
+import Register from '../components/Auth/Register';
 
 const Home = () => {
   return (
@@ -27,13 +29,17 @@ const Home = () => {
         color={'black'}
 			>
         <Tabs variant={'soft-rounded'}>
-          <TabList>
-            <Tab>Login</Tab>
-            <Tab>Register</Tab>
+          <TabList m={'1em'}>
+            <Tab width="50%">Login</Tab>
+            <Tab width="50%">Register</Tab>
           </TabList>
           <TabPanels>
-            <TabPanel>login</TabPanel>
-            <TabPanel>register</TabPanel>
+            <TabPanel>
+              <Login />
+            </TabPanel>
+            <TabPanel>
+              <Register />
+            </TabPanel>
           </TabPanels>
         </Tabs>
 			</Box>
